@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:covid_tracker_app/view/splash_screen.dart';
 
 void main(List<String> args) {
-  runApp(const MyApp());
+  runApp(const CovidTrackerApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CovidTrackerApp extends StatelessWidget {
+  const CovidTrackerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Covid Tracker App',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blue,
+      ),
+      home: const SplashScreen(),
+    );
   }
 }
