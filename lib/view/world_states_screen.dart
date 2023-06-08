@@ -1,6 +1,7 @@
 import 'package:covid_tracker_app/Models/world_states_model.dart';
-import 'package:covid_tracker_app/Services/states_services.dart';
+
 import 'package:covid_tracker_app/View/country_list.dart';
+import 'package:covid_tracker_app/ViewModel/Services/states_services.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -33,6 +34,7 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
 
   @override
   Widget build(BuildContext context) {
+    // creating object for services class to call it attributes here...
     StatesServices statesServices = StatesServices();
 
     return Scaffold(
@@ -51,7 +53,7 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                     flex: 1,
                     child: SpinKitFadingCircle(
                       color: Colors.white,
-                      size: 45,
+                      size: 35,
                       controller: _controller,
                     ),
                   );
@@ -67,17 +69,28 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                           "Death":
                               double.parse(snapshot.data!.deaths.toString()),
                         },
-                        chartType: ChartType.ring,
-                        animationDuration: const Duration(seconds: 2),
-                        baseChartColor: Colors.white,
-                        chartLegendSpacing: 130,
+                        animationDuration: const Duration(milliseconds: 1200),
+                        chartLegendSpacing: 32,
                         chartRadius: MediaQuery.of(context).size.width / 3.2,
+                        colorList: colorList,
+                        initialAngleInDegree: 0,
+                        chartType: ChartType.ring,
+                        ringStrokeWidth: 25,
                         legendOptions: const LegendOptions(
+                          showLegendsInRow: false,
                           legendPosition: LegendPosition.left,
+                          showLegends: true, // for text Details
+                          legendTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         chartValuesOptions: const ChartValuesOptions(
-                            showChartValuesInPercentage: true),
-                        colorList: colorList,
+                          showChartValueBackground: true,
+                          showChartValues: true,
+                          showChartValuesInPercentage: true,
+                          showChartValuesOutside: true,
+                          decimalPlaces: 1,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -124,8 +137,6 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                       ),
                       GestureDetector(
                         onTap: () {
-                          //TODO tap function needed.
-
                           Navigator.push(
                               context,
                               MaterialPageRoute(

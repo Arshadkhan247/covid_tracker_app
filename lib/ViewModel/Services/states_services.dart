@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:covid_tracker_app/Models/world_states_model.dart';
-import 'package:covid_tracker_app/Services/Utilities/app_url.dart';
+import 'package:covid_tracker_app/ViewModel/Services/Utilities/app_url.dart';
 import 'package:http/http.dart' as http;
 
 class StatesServices {
