@@ -1,5 +1,3 @@
-import 'package:covid_tracker_app/Models/world_states_model.dart';
-import 'package:covid_tracker_app/view/splash_screen.dart';
 import 'package:covid_tracker_app/view/world_states_screen.dart';
 import 'package:flutter/material.dart';
 

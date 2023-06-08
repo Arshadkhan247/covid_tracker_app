@@ -2,8 +2,9 @@ import 'package:covid_tracker_app/Models/world_states_model.dart';
 
 import 'package:covid_tracker_app/View/country_list.dart';
 import 'package:covid_tracker_app/ViewModel/Services/states_services.dart';
+import 'package:covid_tracker_app/ViewModel/Utilities/Widgets/pie_chart_widget.dart';
+import 'package:covid_tracker_app/ViewModel/Utilities/Widgets/reuseble_row.dart';
 import 'package:flutter/material.dart';
-import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WorldStatesScreen extends StatefulWidget {
@@ -19,13 +20,6 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
       AnimationController(duration: const Duration(seconds: 3), vsync: this)
         ..repeat();
 
-  // colors list for pie chart ...
-  final colorList = <Color>[
-    const Color(0xff4285F4),
-    const Color(0xff1aa260),
-    const Color(0xffde5246),
-  ];
-
   @override
   void dispose() {
     _controller.dispose(); // to free the space after use...
@@ -34,7 +28,7 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
 
   @override
   Widget build(BuildContext context) {
-    // creating object for services class to call it attributes here...
+    // creating object for services class to call it attributes & functions here...
     StatesServices statesServices = StatesServices();
 
     return Scaffold(
@@ -60,37 +54,13 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                 } else {
                   return Column(
                     children: [
-                      PieChart(
-                        dataMap: {
-                          "Total":
-                              double.parse(snapshot.data!.cases.toString()),
-                          "Recovered":
-                              double.parse(snapshot.data!.recovered.toString()),
-                          "Death":
-                              double.parse(snapshot.data!.deaths.toString()),
-                        },
-                        animationDuration: const Duration(milliseconds: 1200),
-                        chartLegendSpacing: 32,
-                        chartRadius: MediaQuery.of(context).size.width / 3.2,
-                        colorList: colorList,
-                        initialAngleInDegree: 0,
-                        chartType: ChartType.ring,
-                        ringStrokeWidth: 25,
-                        legendOptions: const LegendOptions(
-                          showLegendsInRow: false,
-                          legendPosition: LegendPosition.left,
-                          showLegends: true, // for text Details
-                          legendTextStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        chartValuesOptions: const ChartValuesOptions(
-                          showChartValueBackground: true,
-                          showChartValues: true,
-                          showChartValuesInPercentage: true,
-                          showChartValuesOutside: true,
-                          decimalPlaces: 1,
-                        ),
+                      PieChartWidget(
+                        total: 'Total',
+                        totalval: snapshot.data!.cases.toString(),
+                        recovered: 'Recovered',
+                        recoveredval: snapshot.data!.recovered.toString(),
+                        death: 'Death',
+                        deathval: snapshot.data!.deaths.toString(),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -99,35 +69,34 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                           elevation: 3,
                           child: Column(
                             children: [
-                              ReusableRow(
+                              ReusebleRow(
                                 title: 'Total',
                                 value: snapshot.data!.cases.toString(),
                               ),
-                              ReusableRow(
-                                title: 'Recovered',
-                                value: snapshot.data!.recovered.toString(),
-                              ),
-                              ReusableRow(
+                              ReusebleRow(
                                 title: 'Death',
                                 value: snapshot.data!.deaths.toString(),
                               ),
-                              ReusableRow(
+                              ReusebleRow(
+                                  title: 'Recovered',
+                                  value: snapshot.data!.recovered.toString()),
+                              ReusebleRow(
                                 title: 'Active',
                                 value: snapshot.data!.active.toString(),
                               ),
-                              ReusableRow(
+                              ReusebleRow(
                                 title: 'Critical',
                                 value: snapshot.data!.critical.toString(),
                               ),
-                              ReusableRow(
+                              ReusebleRow(
                                 title: 'Today Cases',
                                 value: snapshot.data!.todayCases.toString(),
                               ),
-                              ReusableRow(
+                              ReusebleRow(
                                 title: 'Today Death',
                                 value: snapshot.data!.todayDeaths.toString(),
                               ),
-                              ReusableRow(
+                              ReusebleRow(
                                 title: 'Today Recovered',
                                 value: snapshot.data!.todayRecovered.toString(),
                               ),
@@ -138,18 +107,17 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const CountryListScreen()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CountryListScreen(),
+                            ),
+                          );
                         },
                         child: Container(
                           height: 50,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: const Color(
-                              0xFF1aa260,
-                            ),
+                            color: const Color(0xFF1aa260),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
@@ -164,34 +132,6 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
             ),
           ]),
         ),
-      ),
-    );
-  }
-}
-
-class ReusableRow extends StatelessWidget {
-  final String title, value;
-  const ReusableRow({
-    super.key,
-    required this.title,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 6),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(title),
-              Text(value),
-            ],
-          ),
-          const Divider(color: Colors.transparent)
-        ],
       ),
     );
   }
