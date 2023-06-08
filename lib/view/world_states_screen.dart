@@ -74,32 +74,27 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                                 value: snapshot.data!.cases.toString(),
                               ),
                               ReusebleRow(
-                                title: 'Death',
-                                value: snapshot.data!.deaths.toString(),
-                              ),
+                                  title: 'Death',
+                                  value: snapshot.data!.deaths.toString()),
                               ReusebleRow(
                                   title: 'Recovered',
                                   value: snapshot.data!.recovered.toString()),
                               ReusebleRow(
-                                title: 'Active',
-                                value: snapshot.data!.active.toString(),
-                              ),
+                                  title: 'Active',
+                                  value: snapshot.data!.active.toString()),
                               ReusebleRow(
-                                title: 'Critical',
-                                value: snapshot.data!.critical.toString(),
-                              ),
+                                  title: 'Critical',
+                                  value: snapshot.data!.critical.toString()),
                               ReusebleRow(
-                                title: 'Today Cases',
-                                value: snapshot.data!.todayCases.toString(),
-                              ),
+                                  title: 'Today Cases',
+                                  value: snapshot.data!.todayCases.toString()),
                               ReusebleRow(
-                                title: 'Today Death',
-                                value: snapshot.data!.todayDeaths.toString(),
-                              ),
+                                  title: 'Today Death',
+                                  value: snapshot.data!.todayDeaths.toString()),
                               ReusebleRow(
-                                title: 'Today Recovered',
-                                value: snapshot.data!.todayRecovered.toString(),
-                              ),
+                                  title: 'Today Recovered',
+                                  value:
+                                      snapshot.data!.todayRecovered.toString()),
                             ],
                           ),
                         ),
