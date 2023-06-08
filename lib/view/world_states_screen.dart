@@ -19,7 +19,11 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
         ..repeat();
 
   // colors list for pie chart ...
-  final colorList = <Color>[Colors.blue, Colors.green, Colors.red];
+  final colorList = <Color>[
+    const Color(0xff4285F4),
+    const Color(0xff1aa260),
+    const Color(0xffde5246),
+  ];
 
   @override
   void dispose() {
@@ -55,10 +59,13 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                   return Column(
                     children: [
                       PieChart(
-                        dataMap: const {
-                          "Total": 1000,
-                          "Recovered": 75,
-                          "Death": 25,
+                        dataMap: {
+                          "Total":
+                              double.parse(snapshot.data!.cases.toString()),
+                          "Recovered":
+                              double.parse(snapshot.data!.recovered.toString()),
+                          "Death":
+                              double.parse(snapshot.data!.deaths.toString()),
                         },
                         chartType: ChartType.ring,
                         animationDuration: const Duration(seconds: 2),
@@ -75,21 +82,41 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
                       Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: MediaQuery.of(context).size.height * .06),
-                        child: const Card(
+                        child: Card(
                           elevation: 3,
                           child: Column(
                             children: [
                               ReusableRow(
                                 title: 'Total',
-                                value: '100',
+                                value: snapshot.data!.cases.toString(),
                               ),
                               ReusableRow(
                                 title: 'Recovered',
-                                value: '75',
+                                value: snapshot.data!.recovered.toString(),
                               ),
                               ReusableRow(
                                 title: 'Death',
-                                value: '25',
+                                value: snapshot.data!.deaths.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'Active',
+                                value: snapshot.data!.active.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'Critical',
+                                value: snapshot.data!.critical.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'Today Cases',
+                                value: snapshot.data!.todayCases.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'Today Death',
+                                value: snapshot.data!.todayDeaths.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'Today Recovered',
+                                value: snapshot.data!.todayRecovered.toString(),
                               ),
                             ],
                           ),

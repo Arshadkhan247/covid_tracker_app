@@ -10,8 +10,10 @@ class CountryListScreen extends StatefulWidget {
 class _CountryListScreenState extends State<CountryListScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text('Country Screen'),),
+    return const Scaffold(
+      body: Center(
+        child: Text('Country Screen'),
+      ),
     );
   }
 }
