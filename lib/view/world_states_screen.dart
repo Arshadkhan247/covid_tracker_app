@@ -1,3 +1,4 @@
+import 'package:covid_tracker_app/View/country_list.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
@@ -14,11 +15,12 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
       AnimationController(duration: const Duration(seconds: 3), vsync: this)
         ..repeat();
 
+  // colors list for pie chart ...
   final colorList = <Color>[Colors.blue, Colors.green, Colors.red];
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.dispose(); // to free the space after use...
     super.dispose();
   }
 
@@ -34,7 +36,7 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
             ),
             PieChart(
               dataMap: const {
-                "Total": 100,
+                "Total": 1000,
                 "Recovered": 75,
                 "Death": 25,
               },
@@ -46,6 +48,8 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
               legendOptions: const LegendOptions(
                 legendPosition: LegendPosition.left,
               ),
+              chartValuesOptions:
+                  const ChartValuesOptions(showChartValuesInPercentage: true),
               colorList: colorList,
             ),
             Padding(
@@ -74,7 +78,11 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
             GestureDetector(
               onTap: () {
                 //TODO tap function needed.
-                print('I am Tapped');
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CountryListScreen()));
               },
               child: Container(
                 height: 50,
@@ -118,9 +126,7 @@ class ReusableRow extends StatelessWidget {
               Text(value),
             ],
           ),
-          const Divider(
-            color: Colors.transparent,
-          )
+          const Divider(color: Colors.transparent)
         ],
       ),
     );

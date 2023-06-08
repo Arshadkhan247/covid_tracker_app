@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:covid_tracker_app/view/world_states_screen.dart';
+import 'package:covid_tracker_app/View/world_states_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -27,8 +27,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(milliseconds: 300), () {
-      Navigator.push(
+    Timer(const Duration(milliseconds: 400), () {
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const WorldStatesScreen()),
       );
@@ -45,19 +45,18 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             AnimatedBuilder(
               animation: _controller,
-              child: const SizedBox(
-                width: 200.0,
-                height: 200.0,
-                child: Center(
-                  child: Image(
-                    image: AssetImage('assets/virus.png'),
-                  ),
-                ),
-              ),
               builder: (BuildContext context, Widget? child) {
                 return Transform.rotate(
                   angle: _controller.value * 2.0 * math.pi,
-                  child: child,
+                  child: const SizedBox(
+                    width: 200.0,
+                    height: 200.0,
+                    child: Center(
+                      child: Image(
+                        image: AssetImage('assets/virus.png'),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),

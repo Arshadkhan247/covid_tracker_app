@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:covid_tracker_app/view/splash_screen.dart';
+import 'package:covid_tracker_app/View/splash_screen.dart';
 
 void main(List<String> args) {
   runApp(const CovidTrackerApp());
