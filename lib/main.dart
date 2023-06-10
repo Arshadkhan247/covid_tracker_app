@@ -1,4 +1,4 @@
-import 'package:covid_tracker_app/view/world_states_screen.dart';
+import 'package:covid_tracker_app/View/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
@@ -17,7 +17,7 @@ class CovidTrackerApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
-      home: const WorldStatesScreen(),
+      home: const SplashScreen(),
     );
   }
 }
