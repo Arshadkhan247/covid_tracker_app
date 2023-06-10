@@ -24,7 +24,7 @@ class PieChartWidget extends StatelessWidget {
         death: double.parse(deathval),
       },
       animationDuration: const Duration(milliseconds: 1200),
-      chartLegendSpacing: 80,
+      chartLegendSpacing: 60,
       chartRadius: MediaQuery.of(context).size.width / 3.2,
       colorList: ConstantFile().colorList,
       initialAngleInDegree: 0,
