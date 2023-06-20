@@ -64,30 +64,14 @@ class _CountryListScreenState extends State<CountryListScreen> {
                           highlightColor: Colors.grey.shade100,
                           child: Column(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CountryRecordScreen(),
-                                    ),
-                                  );
-                                },
-                                child: ListTile(
-                                  leading: Container(
-                                      height: 60,
-                                      width: 60,
-                                      color: Colors.white),
-                                  title: Container(
-                                      height: 12,
-                                      width: 90,
-                                      color: Colors.white),
-                                  subtitle: Container(
-                                      height: 12,
-                                      width: 90,
-                                      color: Colors.white),
-                                ),
-                              )
+                              ListTile(
+                                leading: Container(
+                                    height: 60, width: 60, color: Colors.white),
+                                title: Container(
+                                    height: 12, width: 90, color: Colors.white),
+                                subtitle: Container(
+                                    height: 12, width: 90, color: Colors.white),
+                              ),
                             ],
                           ),
                         );
@@ -106,8 +90,24 @@ class _CountryListScreenState extends State<CountryListScreen> {
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CountryRecordScreen(),
+                                      builder: (context) => CountryRecordScreen(
+                                        name: snapshot.data![index]['country'],
+                                        flag: snapshot.data![index]
+                                            ['countryInfo']['flag'],
+                                        totalCases: snapshot.data![index]
+                                            ['cases'],
+                                        totalRecovered: snapshot.data![index]
+                                            ['recovered'],
+                                        totalDeaths: snapshot.data![index]
+                                            ['deaths'],
+                                        active: snapshot.data![index]['active'],
+                                        test: snapshot.data![index]
+                                            ['todayCases'],
+                                        todayRecovered: snapshot.data![index]
+                                            ['todayRecovered'],
+                                        critical: snapshot.data![index]
+                                            ['critical'],
+                                      ),
                                     ),
                                   );
                                 },
@@ -131,18 +131,31 @@ class _CountryListScreenState extends State<CountryListScreen> {
                         } else if (name
                             .toLowerCase()
                             .contains(searchController.text.toLowerCase())) {
-                          return Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CountryRecordScreen(),
-                                    ),
-                                  );
-                                },
-                                child: ListTile(
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => CountryRecordScreen(
+                                    name: snapshot.data![index]['country'],
+                                    flag: snapshot.data![index]['countryInfo']
+                                        ['flag'],
+                                    totalCases: snapshot.data![index]['cases'],
+                                    totalRecovered: snapshot.data![index]
+                                        ['recovered'],
+                                    totalDeaths: snapshot.data![index]
+                                        ['deaths'],
+                                    active: snapshot.data![index]['active'],
+                                    test: snapshot.data![index]['todayCases'],
+                                    todayRecovered: snapshot.data![index]
+                                        ['todayRecovered'],
+                                    critical: snapshot.data![index]['critical'],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              children: [
+                                ListTile(
                                   leading: CircleAvatar(
                                     backgroundColor: Colors.black,
                                     maxRadius: 25,
@@ -155,9 +168,9 @@ class _CountryListScreenState extends State<CountryListScreen> {
                                   title: Text(snapshot.data![index]['country']),
                                   subtitle: Text(
                                       'Effected  ${snapshot.data![index]['cases']}'),
-                                ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           );
                         } else {
                           return Container();

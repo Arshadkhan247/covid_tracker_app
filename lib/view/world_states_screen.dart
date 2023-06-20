@@ -28,7 +28,7 @@ class _WorldStatesScreenState extends State<WorldStatesScreen>
 
   @override
   Widget build(BuildContext context) {
-    // creating object for services class to call it attributes & functions here...
+    // creating object for services class to call it's attributes & functions here ...
     StatesServices statesServices = StatesServices();
 
     return Scaffold(

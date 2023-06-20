@@ -13,7 +13,7 @@ class CovidTrackerApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Covid Tracker App',
-      theme: ThemeData(
+      theme: ThemeData( 
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
